@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', sans-serif;
+    --font-manrope: 'Manrope', sans-serif;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply min-h-screen bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Glass card utility - reference design-agent.cursorrule for exact values */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl;
+  }
+
+  .glass-card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] hover:border-white/20;
+  }
+
+  .glass-button {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-6 py-3 font-medium transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:shadow-lg active:scale-95;
+  }
+
+  .glass-input {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:border-white/30 focus:ring-2 focus:ring-white/10 transition-all duration-200;
+  }
+}
+
