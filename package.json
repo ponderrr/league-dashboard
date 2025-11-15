@@ -6,28 +6,34 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate": "tsx scripts/run-migration.ts",
+    "test:api": "tsx scripts/test-api.ts",
+    "test:routes": "tsx scripts/test-api-routes.ts"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.1.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "date-fns": "^3.0.6",
+    "next": "^15.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "next": "^15.0.0",
-    "@supabase/supabase-js": "^2.39.0",
-    "@supabase/ssr": "^0.1.0",
-    "zustand": "^4.4.7",
     "zod": "^3.22.4",
-    "date-fns": "^3.0.6"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "typescript": "^5.3.3",
     "@types/node": "^20.10.6",
+    "@types/pg": "^8.15.6",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.16",
+    "dotenv": "^17.2.3",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^15.0.0",
+    "pg": "^8.16.3",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
-    "eslint": "^8.56.0",
-    "eslint-config-next": "^15.0.0"
+    "tsx": "^4.20.6",
+    "typescript": "^5.3.3"
   }
 }
-
