@@ -140,21 +140,46 @@ export const sleeperApi = {
     return matchupsByWeek;
   },
 
-  // Helper to get all historical leagues for a user
+  // Helper to get all historical leagues for a user (optimized with parallel requests)
   async getAllUserLeagues(
     userId: string,
     sport: string,
     startYear: number,
     endYear: number
   ): Promise<SleeperLeague[]> {
+    const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i);
+    
+    // Fetch recent years first (last 3 years), then older years
+    const recentYears = years.slice(-3).reverse();
+    const olderYears = years.slice(0, -3).reverse();
+    const orderedYears = [...recentYears, ...olderYears];
+
+    // Process in batches of 3 to avoid rate limits
+    const batchSize = 3;
     const allLeagues: SleeperLeague[] = [];
 
-    for (let year = startYear; year <= endYear; year++) {
-      try {
-        const leagues = await this.getUserLeagues(userId, sport, year.toString());
-        allLeagues.push(...leagues);
-      } catch (error) {
-        console.error(`Failed to fetch leagues for ${year}:`, error);
+    for (let i = 0; i < orderedYears.length; i += batchSize) {
+      const batch = orderedYears.slice(i, i + batchSize);
+      
+      const batchPromises = batch.map(async (year) => {
+        try {
+          const leagues = await this.getUserLeagues(userId, sport, year.toString());
+          return leagues;
+        } catch (error) {
+          // 404 is normal for years with no leagues, don't log as error
+          if (error instanceof Error && !error.message.includes('404')) {
+            console.error(`Failed to fetch leagues for ${year}:`, error);
+          }
+          return [];
+        }
+      });
+
+      const batchResults = await Promise.all(batchPromises);
+      batchResults.forEach(leagues => allLeagues.push(...leagues));
+
+      // Small delay between batches to be respectful of rate limits
+      if (i + batchSize < orderedYears.length) {
+        await new Promise(resolve => setTimeout(resolve, 200));
       }
     }
 

@@ -45,8 +45,8 @@ async function testAPIRoutes() {
 
   // Test 1: Get user by username
   const test1 = await testRoute(
-    'GET /api/sleeper/user/[username]',
-    `${BASE_URL}/api/sleeper/user/sleeper`
+    'GET /api/sleeper/user/by-username/[username]',
+    `${BASE_URL}/api/sleeper/user/by-username/sleeper`
   );
   test1 ? results.passed++ : results.failed++;
 

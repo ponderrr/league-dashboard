@@ -12,12 +12,16 @@
     "test:routes": "tsx scripts/test-api-routes.ts"
   },
   "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "@react-three/postprocessing": "^2.16.0",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.0",
     "date-fns": "^3.0.6",
-    "next": "^15.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "14.2.18",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "three": "0.160.1",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },
@@ -26,14 +30,18 @@
     "@types/pg": "^8.15.6",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
+    "@types/three": "^0.181.0",
     "autoprefixer": "^10.4.16",
     "dotenv": "^17.2.3",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^15.0.0",
+    "eslint-config-next": "14.2.18",
     "pg": "^8.16.3",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
     "tsx": "^4.20.6",
     "typescript": "^5.3.3"
+  },
+  "overrides": {
+    "three": "0.160.1"
   }
 }

@@ -36,8 +36,9 @@ async function runMigration() {
     await client.connect();
     console.log('✅ Connected!\n');
 
-    // Read migration file
-    const migrationPath = join(process.cwd(), 'migrations', 'phase2-schema.sql');
+    // Read migration file - use command line argument or default to phase2
+    const migrationFile = process.argv[2] || 'phase2-schema.sql';
+    const migrationPath = join(process.cwd(), 'migrations', migrationFile);
     console.log(`📄 Reading migration file: ${migrationPath}`);
     const sql = readFileSync(migrationPath, 'utf-8');
     
